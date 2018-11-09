@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+		<title>Reserva</title>
+{% endblock %}
+{% block contenido %}
+
+    <div class="container">
+
+        <div align="center">
+
+            <h3>{{reservas.description}}</h3>
+            {% load static %}
+            <img src="{% static '/media/'%}{{ reservas.image }}" class="img-thumbnail" alt="{{reservas.description}}" width="304">
+            <div>
+                 <form method="POST" action="{% url 'reservas:finalizar_reserva' %}"> {% csrf_token %}
+
+                      <input type="hidden" name="property_id" value="{{reservas.pk}}">
+                     <div class="form-group col-md-4">
+                         <label >Fechas Disponibles</label>
+
+                          <select name="dates" id="dates" class="form-control" multiple="multiple" required>
+                              {% for date in dates %}
+                                <option value="{{ date.pk }}">{{ date.fechaReserva }}</option>
+                              {% endfor %}
+                          </select>
+                     </div>
+                      <button type="submit" style="margin-top:2px;" class="btn btn-primary mb-2">Aceptar</button>
+                 </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

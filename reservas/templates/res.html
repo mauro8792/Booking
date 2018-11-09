@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %}Próximas Conferencias{% endblock %}
+
+{% block contenido %}
+
+	<div class="container" >
+			<div >
+				 <form class="form-inline"  action="{% url 'reservas:res_param' %}" method="POST" > {% csrf_token %}
+
+
+					<div class="form-group mb-2 " style="margin-left: 40px;">
+					  <label for="desde"><h2> <span class="badge badge-secondary">Desde</span></h2></label>
+					  <input type="date" name="desde" class="form-control-plaintext" id="desde">
+					</div>
+					<div class="form-group mb-2 " style="margin-left: 40px;">
+					  <label  for="hasta"><h2> <span class="badge badge-secondary">Hasta</span></h2> </label>
+					  <input type="date" name="hasta" class="form-control-plaintext" id="hasta">
+					</div>
+					 <div class="form-group mb-2 " style="margin-left: 40px;">
+						 <label  for="ciudad"><h2> <span class="badge badge-secondary">Ciudad</span></h2></label>
+						 <input type="text" name="ciudad" class="form-control-plaintext" id="ciudad">
+					 </div>
+					 <div class="form-group mb-2 " >
+						 <label> &nbsp;</label>
+						 <button type="submit" style="margin-top:50px; margin-left: 40px;" class="btn btn-primary mb-2 ">Buscar</button>
+					 </div>
+
+
+
+				</form>
+			</div>
+
+			<br>
+			<div>
+				<h3> Propiedades disponibles </h3>
+				<table class="table">
+							<tr>
+								<td></td>
+								<td>Descripcion</td>
+								<td>Valor por Dia</td>
+								<td></td>
+							</tr>
+							{% for c in reservas %}
+							<tr>
+								<td><img src="{% static '/media/'%}{{ c.image }}" width="120" ></td>
+								<td>{{ c.description }}</td>
+								<td>$ {{ c.amount }}</td>
+								<td><a href="{% url 'reservas:hacer_reserva' c.pk %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reservar</a></td>
+
+
+							</tr>
+							{% endfor %}
+				</table>
+			</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>{% block titulo %}Booking Web{% endblock %}</title>
+    </head>
+    <body  style="background-color:#A6B1BE;" >
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="navbar-brand" href="/reservas">Booking</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'reservas:ver_reserv' %}">Propiedades <span class="sr-only">(current)</span></a>
+                  </li>
+                </ul>
+              </div>
+        </nav>
+
+        <div id="menu" >
+
+        {% block menu %}
+            <!-- A revisar ... problemas csrf despues de login...
+            {% if request.user != None %}
+                <a href="/accounts/logout/">Logout</a>
+            {% else %}
+                <a href="/accounts/login/">Login</a>
+            {% endif %}
+            -->
+
+        {% endblock %}
+        </div>
+
+        <div id="contenido" >
+        {% block contenido %}{% endblock %}
+        </div>
+    </body>
+</br>
+    <footer>
+        Sistema de prueba en Django Fwk (v 1.10.3) - UTN Sistemas III
+    </footer>
+
+</html>
+
+
